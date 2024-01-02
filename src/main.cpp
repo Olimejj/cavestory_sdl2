@@ -1,16 +1,12 @@
 #include <iostream>
 
-#include "graphics.h"
-
+#include "game.h"
 
 using namespace std;
 
 int main(){
     cout << "Hello Word\n";
-    Graphics graphics;
-    for(int x = 0; x < 1000000; x++){
-        cout << "running still\n";
-    }
+    Game game;
 
 
     return 0;
