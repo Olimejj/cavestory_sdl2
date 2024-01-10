@@ -24,8 +24,8 @@ void Game::gameLoop(){
     
     this->_player = Sprite(graphics, "media/sprites/MyChar.png", 0, 0, 16, 16, 100, 100);
 
-    int LAST_UPDATE_TIME = SDL_GetTicks();
     while(true){
+        Uint64 start = SDL_GetPerformanceCounter();
         input.beginNewFrame();
         if(SDL_PollEvent(&event)){
             cout << event.type << endl;
@@ -47,12 +47,14 @@ void Game::gameLoop(){
             return;
         }
 
-        const int CURRENT_TIME_MS = SDL_GetTicks();
-        int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
-        this->update(std::min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
-        LAST_UPDATE_TIME = CURRENT_TIME_MS;
 
         this->draw(graphics);
+        Uint64 end = SDL_GetPerformanceCounter();
+        float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+
+        SDL_Delay(floor(16.666f - elapsedMS));
+        float elapsed = (end - start) / (float) SDL_GetPerformanceFrequency();
+        cout << "Current FPS: " << to_string(1.0f / elapsed) << endl;
     }
 }
 void Game::draw(Graphics &graphics){
