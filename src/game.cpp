@@ -22,10 +22,10 @@ void Game::gameLoop(){
     Input input;
     SDL_Event event;
     
-    this->_player = AnimatedSprite(graphics, "media/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
+    this->_player = AnimatedSprite(graphics, "media/sprites/Myface.png", 0, 0, 16, 16, 100, 100, 150);
     this->_player.setupAnimations();
     this->_player.playAnimation("RunLeft");
-    const int targetFrameTime = 16;
+    const int targetFrameTime = 160;
     while(true){
         Uint64 start = SDL_GetTicks();
         input.beginNewFrame();
@@ -49,7 +49,7 @@ void Game::gameLoop(){
             return;
         }
 
-
+        this->update(start);
         this->draw(graphics);
         Uint64 frameTime = SDL_GetTicks() - start;
 
@@ -60,6 +60,7 @@ void Game::gameLoop(){
         frameTime = SDL_GetTicks() - start;
         float currentFPS = frameTime > 0 ? 1000.0f / frameTime : 0.0f;
         cout << "Current FPS: " << currentFPS << endl;
+
 
         //SDL_Delay(floor(16.666f - elapsedMS));
         //float elapsed = (end - start) / (float) SDL_GetPerformanceFrequency();

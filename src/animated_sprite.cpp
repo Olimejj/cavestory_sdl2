@@ -2,6 +2,8 @@
 #include "sprite.h"
 #include "graphics.h"
 
+#include <iostream>
+
 AnimatedSprite::AnimatedSprite(){}
 
 AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &filePath, int sourceX, int sourceY, int width, int height, float posX, float posY, float timeToUpdate):
@@ -48,6 +50,7 @@ void AnimatedSprite::stopAnimation() {
 }
 
 void AnimatedSprite::update(int elapsedTime) {
+    std::cout << "elapsedTime: " << elapsedTime << std::endl;
     Sprite::update();
 
     this->_timeElapsed += elapsedTime;
@@ -84,6 +87,6 @@ void AnimatedSprite::animationDone(std::string currentAnimations) {
 }
 
 void AnimatedSprite::setupAnimations(){
-    this->addAnimation(3, 0, 0, "RunLeft", 16, 16, Vector2(0,0));
+    this->addAnimation(4, 0, 0, "RunLeft", 32, 32, Vector2(0,0));
 }
 
