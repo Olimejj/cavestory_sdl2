@@ -82,11 +82,10 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y){
     }
 }
 
-void AnimatedSprite::animationDone(std::string currentAnimations) {
+//void AnimatedSprite::animationDone(std::string currentAnimations) {}
 
-}
-
-void AnimatedSprite::setupAnimations(){
-    this->addAnimation(4, 0, 0, "RunLeft", 32, 32, Vector2(0,0));
-}
+/*void AnimatedSprite::setupAnimations(){
+    //this->addAnimation(4, 0, 0, "FaceReaction", 32, 32, Vector2(0,0));
+    this->addAnimation(3, 0, 0, "RunLeft", 16, 16, Vector2(0,0));
+} */
 

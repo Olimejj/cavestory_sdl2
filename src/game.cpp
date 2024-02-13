@@ -22,7 +22,8 @@ void Game::gameLoop(){
     Input input;
     SDL_Event event;
     
-    this->_player = AnimatedSprite(graphics, "media/sprites/Myface.png", 0, 0, 16, 16, 100, 100, 150);
+    this->_player = AnimatedSprite(graphics, "media/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
+    this->_face = AnimatedSprite(graphics, "media/sprites/Myface.png", 0, 0, 32, 32, 100, 100, 150);
     this->_player.setupAnimations();
     this->_player.playAnimation("RunLeft");
     const int targetFrameTime = 160;
@@ -71,6 +72,7 @@ void Game::draw(Graphics &graphics){
     graphics.clear();
 
     this->_player.draw(graphics, 100, 100);
+    //this->_face.draw(graphics,100, 100);
 
     graphics.flip();
 
@@ -78,4 +80,5 @@ void Game::draw(Graphics &graphics){
 
 void Game::update(float elapsedTime){
     this->_player.update(elapsedTime);
+    this->_face.update(elapsedTime);
 }
