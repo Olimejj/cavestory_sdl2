@@ -3,9 +3,11 @@
 
 Player::Player() {}
 
-Player::Player(Graphics &graphics, float x, float y):
-    AnimatedSprite(graphics, "media/MayChar.png", 0,0,16,16,x,y,100){
-        graphics.loadImage("media/MyChar.png");
+Player::Player(Graphics &graphics, std::string &filePath, float x, float y):
+    AnimatedSprite(graphics, filePath, 0,0,16,16,x,y,100){
+        graphics.loadImage(filePath);
+    this->setupAnimations();
+    this->playAnimation("RunLeft");
 }
 
 void Player::setupAnimations(){

@@ -15,8 +15,10 @@ class Game {
     void gameLoop();
     void draw(Graphics &graphics);
     void update(float elapsedTime);
+    void read_animations(std::string &filePath);
 
     Player _player;
+    Player _face;
 
     //AnimatedSprite _face;
 };

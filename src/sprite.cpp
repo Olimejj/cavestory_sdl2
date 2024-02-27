@@ -14,7 +14,7 @@ Sprite::Sprite(Graphics &graphics, const std::string &filePath, int sourceX, int
 
     this->_spriteSheet = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage(filePath));
     if(this->_spriteSheet == NULL) {
-        std::cout << "\nError: Unable to load image\n";
+        std::cout << "\nError: Unable to load image at file path: " << filePath << std::endl;
     }
 }
 

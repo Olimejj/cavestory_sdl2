@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "game.h"
 #include "input.h"
+#include <string>
 #include <iostream>
 
 namespace {
@@ -21,11 +22,11 @@ void Game::gameLoop(){
     Graphics graphics;
     Input input;
     SDL_Event event;
-    
-    this->_player = AnimatedSprite(graphics, "media/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
-    this->_face = AnimatedSprite(graphics, "media/sprites/Myface.png", 0, 0, 32, 32, 100, 100, 150);
-    this->_player.setupAnimations();
-    this->_player.playAnimation("RunLeft");
+    std::string player_path = "media/sprites/MyChar.png"; 
+    std::string face_path = "media/sprites/Myface.png";
+    this->_player = Player(graphics, player_path, 100, 100);
+    this->_face = Player(graphics, face_path, 200, 200);
+
     const int targetFrameTime = 160;
     while(true){
         Uint64 start = SDL_GetTicks();
@@ -39,6 +40,10 @@ void Game::gameLoop(){
             }
             else if(event.type == SDL_KEYUP){
                 input.keyUpEvent(event);
+            }
+            else if (event.type == SDL_MOUSEBUTTONDOWN){
+                std::cout << "mouse clicked at: x-" << event.button.x << " y-"<< event.button.y << std::endl;
+
             }
 
             else if(event.type == SDL_QUIT){
@@ -60,7 +65,7 @@ void Game::gameLoop(){
         //float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
         frameTime = SDL_GetTicks() - start;
         float currentFPS = frameTime > 0 ? 1000.0f / frameTime : 0.0f;
-        cout << "Current FPS: " << currentFPS << endl;
+        //cout << "Current FPS: " << currentFPS << endl;
 
 
         //SDL_Delay(floor(16.666f - elapsedMS));
@@ -71,8 +76,8 @@ void Game::gameLoop(){
 void Game::draw(Graphics &graphics){
     graphics.clear();
 
-    this->_player.draw(graphics, 100, 100);
-    //this->_face.draw(graphics,100, 100);
+    this->_player.draw(graphics);
+    //this->_face.draw(graphics);
 
     graphics.flip();
 
@@ -81,4 +86,8 @@ void Game::draw(Graphics &graphics){
 void Game::update(float elapsedTime){
     this->_player.update(elapsedTime);
     this->_face.update(elapsedTime);
+}
+
+void Game::read_animations(std::string &filePath){
+    
 }
